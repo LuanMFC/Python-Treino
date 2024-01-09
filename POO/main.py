@@ -1,52 +1,54 @@
-class Empresa():
-    def __init__(self, Nome_Empresa, Anos_Funcionamento, Funcionarios,Contratando):
-        self.Nome_Empresa = Nome_Empresa
-        self.Anos_Funcionamento = Anos_Funcionamento
-        self.Funcionarios = [{Funcionarios}]
-        self.Contratando = Contratando
+import math
+from pickle import FALSE, TRUE
 
-    def Contratar_Funcionario(self):
-        pass
 
-    def Demitir_Funcionario(self):
-        pass
+class User():
+    def __init__(self, nome, idade, cpf):
+        self.nome = nome
+        self.idade = idade
+        self.cpf = cpf
+        self.contaCriada = False
 
-    def Exibir_Funcionario(self):
-        return print(self.Funcionarios)
-
-class Colaborador(Empresa):
-    def __init__(self, Nome, Idade, CPF, Cargo, Salario):
-        self.Nome = Nome
-        self.Idade = Idade
-        self.CPF = CPF
-        self.Cargo = Cargo
-        self.Salario = Salario
-        print("aaaaaaaaaaaa", self.Nome)
     
-class RH(Empresa):
-    index = 0
-    cont = index 
-    def __init__(self, Contratando, Nome_Colaborador, Idade_Colaborador, CPF_Colaborador, Cargo_Colaborador, Salario_Colaborador):
-        self.Contratando = Contratando
-        self.Nome_Colaborador = Nome_Colaborador 
-        if(self.Contratando == True):
-            self.Idade_Colaborador = Idade_Colaborador
-            self.CPF_Colaborador = CPF_Colaborador
-            self.Cargo_Colaborador = Cargo_Colaborador
-            self.Salario_Colaborador = Salario_Colaborador
+class ContaBanco(User):
+    def __init__(self, nome, idade, cpf, nomeUser, email, senha):
+        super().__init__(nome, idade, cpf)
+        self.nomeUser = nomeUser
+        self.email = email
+        self.senha = senha
+        self.saldo = 0
 
-        elif(self.Contratando == False):
-            print(f"Desculpe ", self.Nome_Colaborador, f" não estamos contratando no momento")
+    def VeridicadorIdade(self):
+        if(self.idade < 18):
+            print(f"Olá, {self.nome} você não possui idade sufiente para abrir uma conta, é necessário ser maior de 18 anos.")
+            return True
+        return False
 
-    def Contratar_Funcionario(self):
-        if(self.Contratando == False):
-            return print("Não estamos CONTRATANDO no momento, obrigado!")
+    def AbrirConta(self):
+        if self.VeridicadorIdade():
+            return False
+        print(f"Parabéns, {self.nome}, sua conta foi aberta.")
+        return True
+    def Deposito(self, valorDepositado):
+        if self.AbrirConta():
+            if(valorDepositado >= 1):
+                self.saldo = valorDepositado
+                print(f"{self.nome} o depósito foi realizado com sucesso")
+                return
 
-        elif(self.Contratando == True):
-            novo_funcionario = Colaborador(self.Nome_Colaborador, self.Idade_Colaborador, self.CPF_Colaborador, self.Cargo_Colaborador, self.Salario_Colaborador)
-            Empresa("Coca-Cola", 19, novo_funcionario, self.Contratando)
-            print(novo_funcionario)
-            return print("Funcionário Contratado")
+            elif(valorDepositado < 1):
+                print(f"{self.nome} é necessário uma quantia mínima de 1 real para realizar o reposito")
+                return
+            
+        return print(f"Não foi possível realizar o depósito, por favor, abra uma conta e tente novamente")
 
-RHTeste = RH(False, "Luan Matheus Ferreira Costa", 19, "000.000.000-00", "Auxiliar de TI", 1200)
-RHTeste.Contratar_Funcionario()
+    def ExibirSaldo(self):
+        print(f"{self.nome} seu saldo é de {self.saldo} reais")
+
+        
+
+
+
+Teste2 = ContaBanco("Luan Matheus Ferreira Costa", 17, "000.000.000-00", "LuanMFC", "luanmatheus198@gmail.com", "123")
+Teste2.Deposito(100)
+Teste2.ExibirSaldo()
