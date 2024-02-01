@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+    <main class="album py-4 bg-light">
+        <section class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <table>
+                        {{new_car.as_table}}
+                    </table>
+                    <input type="submit" value="Submit">
+                </form>
+                
+
+            </div>
+        </section>
+
+    </main>
+{% endblock %}
