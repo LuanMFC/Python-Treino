@@ -19,9 +19,13 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from cars.views import list_cars, new_car_forms
+from account.views import register, user_login, user_logout
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('register/', register, name='register_user'),
+    path('login/', user_login, name='user_login'),
+    path('logout/', user_logout, name='logout'),
     path('cars/', list_cars, name="list_cars"),
     path('new_car/', new_car_forms, name="new_car")
 
