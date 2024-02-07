@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <main class="form-signin w-100 m-auto">
+        <form method="POST">
+
+            {% csrf_token %}
+            <table>
+                {{user.as_table}}
+            </table>
+
+
+
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary">
+            </div>
+        </form>
+    </main>
+{% endblock %}
