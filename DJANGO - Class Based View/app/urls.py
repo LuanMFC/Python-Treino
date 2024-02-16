@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from cars.views import CarListRender, NewCar
+from cars.views import CarListRender, NewCar, DetailsViewCars
 from users.views import new_user, user_login, user_logout
 
 urlpatterns = [
@@ -28,4 +28,5 @@ urlpatterns = [
     path('logout', user_logout, name='logout'),
     path('cars/', CarListRender.as_view(), name="cars_list"),
     path('new_car/', NewCar.as_view(), name="new_car"),
+    path('cars/<int:pk>/', DetailsViewCars.as_view(), name="details_car")
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
