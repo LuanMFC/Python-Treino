@@ -28,6 +28,12 @@
           color: white !important;
           text-decoration: none;
         }
+        .corButtonLogin{
+          color: #0d6efd !important;
+        }
+        .corButtonLogin:hover{
+          color: #ffffff !important;
+        }
     </style>
 </head>
 
@@ -40,10 +46,12 @@
     
           <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
             <li><a href="{% url 'list_cars' %}" class="nav-link px-2 link-secondary">Listar Carros</a></li>
-            <li><a href="{% url 'new_car' %}" class="nav-link px-2 link-dark">Cadastrar Carros</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+            {% if user.is_authenticated %}
+              <li><a href="{% url 'new_car' %}" class="nav-link px-2 link-dark">Cadastrar Carros</a></li>
+              <li><a href="{% url 'register_user' %}" class="nav-link px-2 link-dark">Cadastrar Usuários</a></li>
+              <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+              <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+            {% endif %}
           </ul>
     
           <div class="col-md-3 text-end d-flex justify-content-end">
@@ -55,7 +63,7 @@
             {% endif %}
 
             {% if not user.is_authenticated %}
-              <button type="button" class="btn btn-outline-primary me-2" ><a href="{% url 'user_login' %}" class="color-white">Login</a></button>
+              <a href="{% url 'user_login' %}"><button type="button" class="btn btn-outline-primary me-2" >Login</button></a>
               <button type="button" class="btn btn-primary">Sign-up</button>
             {% endif %}
           </div>

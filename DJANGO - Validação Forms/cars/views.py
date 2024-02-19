@@ -1,33 +1,29 @@
 from django.shortcuts import render, redirect
 from cars.models import Car
 from cars.forms import CarForm
+from django.views.generic import ListView, CreateView, DetailView
 
-# Create your views here.
-def list_cars(request):
-    cars = Car.objects.all()
-    search = request.GET.get("search")
+class List_Cars(ListView):
+    model = Car
+    template_name = 'car_list.html'
+    context_object_name = 'cars'
     
-    if search:
-        cars = Car.objects.filter(model__icontains=search)
+    def get_queryset(self):
+        cars = super().get_queryset().order_by("model")
+        search = self.request.GET.get("search")
 
-    return render(
-        request,
-        'car_list.html',
-        {'cars': cars},
-    )
-
-def new_car_forms(request):
-
-    if request.method == 'POST':
-        new_car = CarForm(request.POST, request.FILES)
-        if new_car.is_valid():
-            new_car.save()
-            return redirect('list_cars')
-    else:
-        new_car = CarForm()
+        if search:
+            cars = super().get_queryset().filter(model__icontains=search)
         
-    return render(
-        request,
-        'new_car.html',
-        {'new_car': new_car}
-    )
+        return cars
+
+
+class CreateCars(CreateView):
+    model = Car
+    form_class = CarForm
+    template_name = 'new_car.html'
+    success_url = "/cars/"
+
+class DetailsCars(DetailView):
+    model = Car
+    template_name = 'details_cars.html'
