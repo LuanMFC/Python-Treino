@@ -2,7 +2,14 @@
 {% load static %}
 
 {% block content %}
-
+    <style>
+        .btn-outline-secondary{
+            color: #6c757d !important;
+        }
+        .btn-outline-secondary:hover{
+            color: #ffffff !important;
+        }
+    </style>
     <main class="album py-4 bg-light">
         <section class="container d-flex bg-white rounded p-5 gap-3">
             <div class="ImageContent">
@@ -25,8 +32,9 @@
                             qualidade por um ótimo preço!</p>
                     </div>
                     <div class="btn-group">
-                        <button class="btn btn-md btn-outline-secondary">Editar</button>
-                        <button class="btn btn-md btn-outline-secondary">Deletar</button>
+                        <a href="{% url 'update_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Editar</a>
+                        <a href="{% url 'delete_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Deletar</a>
+
 
                     </div>
 
