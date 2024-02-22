@@ -31,12 +31,14 @@
                             Não perca a oportunidade de adquirir este veículo de 
                             qualidade por um ótimo preço!</p>
                     </div>
-                    <div class="btn-group">
-                        <a href="{% url 'update_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Editar</a>
-                        <a href="{% url 'delete_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Deletar</a>
+                    {% if user.is_authenticated %}
+                        <div class="btn-group">
+                            <a href="{% url 'update_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Editar</a>
+                            <a href="{% url 'delete_cars' car.pk %}" class="btn btn-md btn-outline-secondary ">Deletar</a>
 
 
-                    </div>
+                        </div>
+                    {% endif %}
 
                 </div>
             </div>
